@@ -1,0 +1,4 @@
+pandas
+sqlAlchemy
+pyodbc
+fastapi
