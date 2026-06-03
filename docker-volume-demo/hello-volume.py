@@ -1,5 +1,8 @@
 from pathlib import Path
 from datetime import datetime
+import os
+
+#Path("/cleaned").mkdir(parents=True)
 
 out = Path("/data/hello.txt")
 
