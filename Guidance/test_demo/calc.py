@@ -17,4 +17,4 @@ class Calculator:
     
 if __name__ == "__main__":
     myCalc = Calculator(10,20)
-    print(myCalc.get_quotient())
+    print(myCalc.get_sum())
