@@ -1,13 +1,19 @@
 ## Before starting, in terminal run 'pip install -r requirements.txt'
 
 import pandas as pd
+import time ## SS add 04.06.26
+import os ## SS add 04.06.26
 from sqlalchemy import create_engine
 #import pyodbc
+
+start_time = time.time()  ## added SS 04.06.2026
 
 # Function to output dataframe that can be manipulated via a filepath
 def fileLoader(filepath):
     data = pd.read_csv(filepath)
     return data 
+
+initial_rows = len(data)
 
 # Duplicate Dropping Function
 def duplicateCleaner(df):
@@ -59,6 +65,7 @@ def enrich_dateDuration(colA, colB, df):
 
     return df
 
+
 def writeToSQL(df, table_name, server, database):
 
     # Create the connection string with Windows Authentication
@@ -100,6 +107,10 @@ if __name__ == '__main__':
     
     # Enriching the dataset
     data = enrich_dateDuration(df=data, colA='Book Returned', colB='Book checkout')
+ 
+    
+    final_rows = len(data)
+    dropped_rows = initial_rows - final_rows
 
     # print to .csv file
     data.to_csv('clean_LibraryBook_file.csv')
@@ -108,15 +119,43 @@ if __name__ == '__main__':
     #Cleaning the customer file
     filepath_input_2 = 'data/03_Library SystemCustomers.csv'
 
+    #row count for metrics
+    initial_rows2 = (data2)
+
     data2 = fileLoader(filepath=filepath_input_2)
 
     # Drop duplicates & NAs
     data2 = duplicateCleaner(data2)
     data2 = naCleaner(data2)
 
+    final_rows2 = len(data2)
+    dropped_rows2 = initial_rows2 - final_rows2
+
     data2.to_csv('clean_LibraryCustomer_file.csv')
     print(data2)
     print('**************** DATA CLEANED ****************')
+
+    end_time = time.time()  ## added SS 04.06.26
+    processing_time = end_time - start_time  #added SS 04.06.2026
+
+    log_data = pd.DataFrame([{
+        "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
+        "Book_file_initial_rows": initial_rows,
+        "Book_file_final_rows": final_rows,
+        "Book_dropped_rows": dropped_rows,
+        "Customer_initial_rows": initial_rows2,
+        "Customer_final_rows": final_rows2,
+        "Customer_dropped_rows": dropped_rows2,
+
+        "processing_time_sec": round(processing_time, 2)
+    }])
+
+    log_data.to_csv(
+        process_log.csv, 
+        mode="a", 
+        header=not os.path.exists("process_log.csv"),
+        index=False
+    )
 
 """
     print('Writing to SQL Server...')
@@ -135,3 +174,4 @@ if __name__ == '__main__':
         database = 'DE5_Module5'
     )
     print('**************** End ****************') """
+
