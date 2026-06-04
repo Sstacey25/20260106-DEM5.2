@@ -7,13 +7,14 @@ from sqlalchemy import create_engine
 #import pyodbc
 
 start_time = time.time()  ## added SS 04.06.2026
+print(start_time)
 
 # Function to output dataframe that can be manipulated via a filepath
 def fileLoader(filepath):
     data = pd.read_csv(filepath)
     return data 
 
-initial_rows = len(data)
+
 
 # Duplicate Dropping Function
 def duplicateCleaner(df):
@@ -97,6 +98,8 @@ if __name__ == '__main__':
 
     data = fileLoader(filepath=filepath_input)
 
+    initial_rows = len(data)
+
     # Drop duplicates & NAs
     data = duplicateCleaner(data)
     data = naCleaner(data)
@@ -112,6 +115,13 @@ if __name__ == '__main__':
     final_rows = len(data)
     dropped_rows = initial_rows - final_rows
 
+    """data = {
+        "dropped rows":dropped_rows
+    }
+    metrics_csv = pd.DataFrame(data)
+    metrics_csv.to_csv("Log_data.csv")
+    """
+
     # print to .csv file
     data.to_csv('clean_LibraryBook_file.csv')
     print(data)
@@ -119,10 +129,11 @@ if __name__ == '__main__':
     #Cleaning the customer file
     filepath_input_2 = 'data/03_Library SystemCustomers.csv'
 
+    
+    data2 = fileLoader(filepath=filepath_input_2)
+
     #row count for metrics
     initial_rows2 = (data2)
-
-    data2 = fileLoader(filepath=filepath_input_2)
 
     # Drop duplicates & NAs
     data2 = duplicateCleaner(data2)
@@ -151,7 +162,7 @@ if __name__ == '__main__':
     }])
 
     log_data.to_csv(
-        process_log.csv, 
+        "process_log.csv", 
         mode="a", 
         header=not os.path.exists("process_log.csv"),
         index=False
