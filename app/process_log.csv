@@ -1,0 +1,2 @@
+timestamp,Book_file_initial_rows,Book_file_final_rows,Book_dropped_rows,Customer_initial_rows,Customer_final_rows,Customer_dropped_rows,processing_time_sec
+2026-06-04 15:28:48,114,19,95,9,8,1,0.03

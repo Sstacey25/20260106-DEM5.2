@@ -14,8 +14,6 @@ def fileLoader(filepath):
     data = pd.read_csv(filepath)
     return data 
 
-
-
 # Duplicate Dropping Function
 def duplicateCleaner(df):
     return df.drop_duplicates().reset_index(drop=True)
@@ -133,7 +131,7 @@ if __name__ == '__main__':
     data2 = fileLoader(filepath=filepath_input_2)
 
     #row count for metrics
-    initial_rows2 = (data2)
+    initial_rows2 = len(data2)
 
     # Drop duplicates & NAs
     data2 = duplicateCleaner(data2)
