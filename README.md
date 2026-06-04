@@ -32,4 +32,10 @@ I can check overdue or un returned books and book availability
       - Books & customer data
       - Pipeline exe time
 
+## Folder Dir:
 
+####    .github\workflows
+    This contains the App which runs a unit test in Docker.
+####    Docker
+    Contains three sub-folders relating to demo's and attempts to run docker with and without volume
+####    Guidance

@@ -1,4 +1,4 @@
-## Before starting, in terminal run 'pip install -r requiremtns.txt'
+## Before starting, in terminal run 'pip install -r requirements.txt'
 
 import pandas as pd
 from sqlalchemy import create_engine
@@ -79,8 +79,11 @@ if __name__ == '__main__':
     print('**************** Starting Clean ****************')
 
     # Instantiation
+    
     #dropCount= 0
+    
     #customer_drop_count = 0
+
     filepath_input = 'data/03_Library Systembook.csv'
     date_columns = ['Book checkout', 'Book Returned']
     date_errors = None
