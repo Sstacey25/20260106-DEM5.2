@@ -102,7 +102,7 @@ if __name__ == '__main__':
     data = enrich_dateDuration(df=data, colA='Book Returned', colB='Book checkout')
 
     # print to .csv file
-    data.to_csv('cleaned_file.csv')
+    data.to_csv('clean_LibraryBook_file.csv')
     print(data)
 
     #Cleaning the customer file
@@ -114,7 +114,7 @@ if __name__ == '__main__':
     data2 = duplicateCleaner(data2)
     data2 = naCleaner(data2)
 
-    data2.to_csv('cleaned_file2.csv')
+    data2.to_csv('clean_LibraryCustomer_file.csv')
     print(data2)
     print('**************** DATA CLEANED ****************')
 
